@@ -77,6 +77,6 @@ def translate(sText):
     returns a translation using
     the MyMemory Translation API.
     '''
-    url = 'http://api.mymemory.translated.net/get?q='+text+'&langpair=ko|en'.encode('utf-8')
+    url = 'http://api.mymemory.translated.net/get?q='+sText+'&langpair=ko|en'.encode('utf-8')
     response = json.load(urllib2.urlopen(url))
     return response['responseData']['translatedText'].encode('utf-8')
