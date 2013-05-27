@@ -39,7 +39,7 @@ class PreProcessor:
                  self.data = tokenize(self.data)
                  break
               else:
-                 print "Warning: found empty doc"
+                 print "Warning: no tweet"
            elif line == "<TWEET>":
               # a new tweet
               self.data = ""
@@ -47,16 +47,14 @@ class PreProcessor:
            else:
               self.data += line + "\n"
             
-def tokenize(sText):
+def tokenize(tweet):
     '''
-    Given a string of text sText, 
-    returns a list of the individual tokens 
-    that occur in that string (in order).
+    Given a tweet, returns a list of the individual tokens that occur in that tweet (in order).
     '''
     lTokens = []
-    sText = sText.lower().strip()
+    tweet = tweet.lower().strip()
     sToken = ""
-    for c in sText:
+    for c in tweet:
        if re.match("[a-zA-Z0-9]", str(c)) != None or c == "\'" or c == "_" or c == '-':
           sToken += c
        else:
@@ -71,12 +69,8 @@ def tokenize(sText):
 
     return lTokens
 
-def translate(sText):
-    '''
-    Given a string of text sText, 
-    returns a translation using
-    the MyMemory Translation API.
-    '''
-    url = 'http://api.mymemory.translated.net/get?q='+sText+'&langpair=ko|en'.encode('utf-8')
+def translate(tweet):
+    ''' Given a tweet, returns a translation using the MyMemory Translation API. '''
+    url = 'http://api.mymemory.translated.net/get?q='+tweet+'&langpair=ko|en'.encode('utf-8')
     response = json.load(urllib2.urlopen(url))
     return response['responseData']['translatedText'].encode('utf-8')
