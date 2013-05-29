@@ -48,9 +48,7 @@ class PreProcessor:
               self.data += line + "\n"
             
 def tokenize(tweet):
-    '''
-    Given a tweet, returns a list of the individual tokens that occur in that tweet (in order).
-    '''
+    ''' Given a tweet, returns a list of the individual tokens that occur in that tweet (in order). '''
     lTokens = []
     tweet = tweet.lower().strip()
     sToken = ""
